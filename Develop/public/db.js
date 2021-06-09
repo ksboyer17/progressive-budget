@@ -14,7 +14,7 @@ request.onsuccess = function (event) {
 };
 
 request.onerror = function (event) {
-  console.log("oh no " + event.target.errorCode);
+  console.log("Not Good " + event.target.errorCode);
 };
 
 function saveRecord(record) {
@@ -41,7 +41,6 @@ function checkDatabase() {
       })
         .then((response) => response.json())
         .then(() => {
-          // delete records if successful
           const transaction = db.transaction(["pending"], "readwrite");
           const store = transaction.objectStore("pending");
           store.clear();
@@ -55,5 +54,4 @@ function deletePending() {
   store.clear();
 }
 
-// listen for app coming back online
 window.addEventListener("online", checkDatabase);
